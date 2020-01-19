@@ -73,8 +73,8 @@ console.log(userNumber2)
 
 
 //igra
-$: confirm = confirm("Вам есть 18?")
-if(confirm) {
+let userConfirm = confirm("Вам есть 18?")
+if(userConfirm) {
     let userGameNumber = prompt("Игра угадайте число от 0 до 10")
     let random = Math.round(Math.random() * 10)
     if(random == userGameNumber) {
