@@ -1,99 +1,45 @@
-// 1st task
+let inp = prompt("Введите 1 символ")
 
-//rectangle square
-let a = 2.4
-let b = 3.3 
-let square = a * b
-let fixedSquare = +square.toFixed(1)
-console.log(fixedSquare, typeof(fixedSquare))
+console.log(inp, typeof(inp))
 
-//my name is polina
+if(inp == null) {
+    document.write("Ввод отменен")
+}
 
-let name = "Polina"
-let age = 25
-let year = 2020
-
-console.log(`My name is ${name} i was born in ${year} and im ${age} years old`)
-
-//circle radius
-
-let radius = parseInt("5.67cm")
-let circleRadius = radius*radius*3.14
-console.log(`Circle radius is ${circleRadius} cm `)
-
-//2nd task
-
-// % 2
-let userNumber = +prompt("проверить число на кратность двум")
-
-if (userNumber) {
-    if(userNumber % 2 === 0) {
-        alert("четное")
-    }
-    else {
-        alert("нечетное")
-    }
-
+if(inp.length > 1 || inp.length == 0) {
+    let inp = " "
 }
 else {
-    alert("введите число")
-}
+    let inpLower = inp.toLowerCase()
+    switch(inp) {
+        case "a":
+        case "e":
+        case "o":
+            alert(inpLower.toUpperCase())
+        break
 
-// % 3
+        case "x":
+        case "y":
+            alert(inp + inp)
+        break
+        case "s":
+        case "q":
+        case "d":
+        case "m":
+            let rand = Math.trunc(Math.random() * 10 + Math.random() * 10)
+            
+            if(rand == 0) {
+                let rand = 1
+            }
 
-let userNumber2 = +prompt("проверить число на кратность трем")
-
-
-if(userNumber2 < 0) {
-    if (userNumber2 % 3 === 0) {
-    userNumber2 = userNumber2 * userNumber2
-    }
-    else {
-    userNumber2 = userNumber2 % 8
-    }  
-}
-
-console.log(userNumber2)
-
-if (userNumber2 > 0) {
-    userNumber2 = Math.sqrt(userNumber2)
-    if (Math.ceil(userNumber2) > 1){
-        userNumber2 = Math.ceil(userNumber2) * Math.ceil(userNumber2)
-    }
-    else {
-        userNumber2 = userNumber2 - 0.5
-    }
-}
-
-if (userNumber2 === 0) {
-    userNumber2 = String(userNumber2)
-}
-
-console.log(userNumber2)
-
-
-//igra
-let userConfirm = confirm("Вам есть 18?")
-if(userConfirm) {
-    let userGameNumber = prompt("Игра угадайте число от 0 до 10")
-    let random = Math.round(Math.random() * 10)
-    if(random == userGameNumber) {
-        alert("Вы угадали!")
-    }
-
-    else {
-        alert("Вы не угадали")
+            alert(rand)
+        break
+        case " ":
+            alert(Boolean(inp))
+        default: 
+            var rand1 = Math.trunc(Math.random() * 10)
+            var rand2 = Math.trunc(Math.random() * 10)
+            var rand3 = Math.trunc(Math.random() * 10)
+            alert(Math.max(rand1, rand2, rand3))
     }
 }
-
-else {
-    alert("Вам нет 18")
-}
-
-
-
-
-
-
-
-
