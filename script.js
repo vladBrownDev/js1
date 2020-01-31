@@ -1,26 +1,31 @@
-function myPow () {
-    num =  +prompt("Введите число")
-    pow = +prompt("Введите степень")
-
-    if(!num || !pow) {
-        alert("Ошибка")
-    }
-    else {
+debugger
+function myPow (num, pow) {
+    
         numSt = num
+
         do {
             num*=numSt
             pow-- 
             
         }
-        while (pow!==1) {
+        while (pow!==1) 
             
-        }
-
         alert(num)
-    }
 }
 
-myPow()
+numInp = prompt("Введите число")
+powInp = prompt("Введите степень")
+
+if(!numInp || !powInp) {
+    alert("Ошибка")
+}
+else {
+    
+    myPow(numInp,powInp)
+
+}
+
+
 
 //2nd task
 let logArgsFunc = function() {
