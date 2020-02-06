@@ -1,96 +1,111 @@
-debugger
-function myPow (num, pow) {
-    
-        numSt = num
-
-        do {
-            num*=numSt
-            pow-- 
-            
-        }
-        while (pow!==1) 
-            
-        alert(num)
+var randArray = []
+for (i=30 + Math.random() * (50 - 30); i>0; i-- ) {
+    randArray.push(Math.floor(-100 + Math.random() * (100 + 100)))
 }
 
-numInp = prompt("Введите число")
-powInp = prompt("Введите степень")
+console.log(randArray)
 
-if(!numInp || !powInp) {
-    alert("Ошибка")
+// for (i=randArray.length - 1 ; i>=0; i--) {
+//     randArray[i] = randArray[i] + 2
+// }
+
+
+
+
+const plusCallback = (element, index, array) => {
+        array[index] = element + 2
 }
-else {
-    
-    myPow(numInp,powInp)
-
-}
+randArray.forEach(plusCallback)
+console.log(randArray)
 
 
 
-//2nd task
-let logArgsFunc = function() {
-    if(arguments.length !== 0) {
-       for(let i = 0; i < arguments.length; i++) {
-           
-           if(typeof arguments[i] == "function") {
-               arguments[i]()
-               document.write(`Function was called <br>`)
-           }
-           else{
-                document.write(`${arguments[i]}, type: ${typeof(arguments[i])} <br>`)  
-           }
-            
-        } 
+let mid = Math.floor(randArray.length/2)
+let midVal = randArray[mid]
+console.log(midVal)
+
+
+
+delete randArray[0]
+randArray[0] = randArray[mid]
+console.log(randArray)
+
+
+
+
+const biggerThanZero = (item, index, array) => {
+    if(array[index]<0) {
+        array[index] = "less than zero"
     }
-    else {
-        document.write("No arguments in function <br>")
-    }
-    
+}
+randArray.find(biggerThanZero)
+console.log(randArray)
+
+
+
+const equalZero = (item, index, array) => {
+    if(array[index] === 0) [
+        array[index] = "zero"
+    ]
+}
+randArray.find(equalZero)
+console.log(randArray)
+
+
+
+let string = 'Lorem ipsum dolor sit amet'
+let reversed = string.split('').reverse().join('')
+console.log(reversed)
+
+
+
+let secString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+let splitSecString = secString.split(". ")
+console.log(splitSecString)
+
+
+
+splitSecString[splitSecString.length - 1] = (splitSecString[splitSecString.length - 1]).toUpperCase()
+console.log(splitSecString)
+
+
+
+let newString = splitSecString.join("\n")
+console.log(newString)
+
+
+let firstArray = []
+for(i=0; i<10; i++) {
+    firstArray[i] = (Math.floor(Math.random() * 10)) 
+}
+console.log(firstArray)
+
+let secondArray = []
+for(i=0; i<10; i++) {
+    secondArray[i] = (-10 + Math.floor(Math.random() * 10)) 
+}
+console.log(secondArray)
+
+let unitedArray = firstArray.concat(secondArray)
+console.log(unitedArray)
+
+function map (element,index,array) {
+    return element / 5
 }
 
-function uselessFunction () {
-    console.log('I am Function')
+let divisedArray = unitedArray.map(map)
+console.log(divisedArray)
+
+function sortFunc (next, prev) {
+    return prev - next
+}
+divisedArray.sort(sortFunc)
+console.log(divisedArray)
+
+function filtFunc(num) {
+    return num % 2 === 0
+
 }
 
-logArgsFunc ()
-
-logArgsFunc (100)
-
-logArgsFunc (100, "test", uselessFunction)
-
-
-
-
-
-
-
-//3nd task
-
-let palStr = prompt("проверка слова на симетричность")
-
-let check = palStr.length - 1
-
-function pal(Str) {
-    let fstSymb = 0
-    let secSymb = Str.length - 1
-
-    for(let i=0;i!==Str.length - 1;i++) {
-
-        if(Str[fstSymb] == Str[secSymb]) {
-            check = true
-            fstSymb++
-            secSymb--
-        
-        }
-
-        else {
-            check = false
-        }
-
-        
-    }
-    return check
-
-
-}
-alert(pal(palStr))
+let filteredArray = divisedArray.filter(filtFunc)
+console.log(filteredArray)
