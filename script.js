@@ -40,9 +40,9 @@ console.log("obj to arr   ",arrayForCope)
 
 function constructObject(objectName = "noName", objectNumber = "0", objectString="") {
     let obj = {}
-    obj.Name = objectName
-    obj.String = objectString
-    obj.Number = objectNumber
+    obj.objectName = objectName
+    obj.objectString = objectString
+    obj.objectNumber = objectNumber
     obj.greet = () => {
         return "hello"
     }
