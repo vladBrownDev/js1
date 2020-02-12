@@ -43,6 +43,9 @@ function constructObject(objectName = "noName", objectNumber = "0", objectString
     obj.Name = objectName
     obj.String = objectString
     obj.Number = objectNumber
+    obj.greet = () => {
+        return "hello"
+    }
     return obj
 }
 
@@ -104,5 +107,7 @@ console.log(copied)
 console.log(targetObj)
 
 targetObj.y.q.c.d[0] = 100
-console.log(copied)
-console.log(targetObj)
+const areElementsEqual = targetObj.y.q.c.d[0] === copied.y.q.c.d[0]
+console.log(areElementsEqual)
+// console.log(copied)
+// console.log(targetObj)
