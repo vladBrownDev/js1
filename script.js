@@ -1,41 +1,45 @@
 //1st task
 "use strict"
 function timeFunc() {
-    let time=new Date();
-    let hours=time.getHours();
-    let minutes=time.getMinutes();
-    let seconds=time.getSeconds();
-    minutes=checkTime(minutes);
-    seconds=checkTime(seconds);
-    document.body.innerHTML=hours+":"+minutes+":"+seconds;
-    setTimeout(timeFunc,500);
+    let time=new Date()
+    let hours=time.getHours()
+    let minutes=time.getMinutes()
+    let seconds=time.getSeconds()
+    minutes=checkTime(minutes)
+    seconds=checkTime(seconds)
+    hours=checkTime(hours)
+    document.body.innerHTML=hours+":"+minutes+":"+seconds
+    setTimeout(timeFunc,500)
 }
 function checkTime(i) {
     if (i<10) {
-        i="0" + i;
+        i="0" + i
     }
-    return i;
+    return i
 }
 
 //2nd task
 
-const timerId = setInterval(() => {
+const timerId = setTimeout(() => {
   console.log('Im a delayed function')
 }, 3500)
 
 //3rd task
 
 
-function bubbleSortFunc(arr)       
-{                            
-    let length = arr.length;
-    for (let i = 0; i < length-1; i++)
-     { for (let j = 0; j < length-1-i; j++)
-        { if (arr[j+1] < arr[j])
-           { let t = arr[j+1]; arr[j+1] = arr[j]; arr[j] = t; }
+function bubbleSortFunc(arr) {
+
+    let length = arr.length
+    for (let i = 0; i < length-1; i++) {
+        for (let j = 0; j < length-1-i; j++) {
+            if (arr[j+1] < arr[j]){
+                let t = arr[j+1]
+                arr[j+1] = arr[j]
+                arr[j] = t
+            }
         }
      }                     
-    return arr;    // На выходе сортированный по возрастанию массив A.
+    return arr;    
 }
 
 let randArr1 = []
