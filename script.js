@@ -1,113 +1,95 @@
+//1st task
 "use strict"
-let testObj = {}
-testObj["prop"] = "test property"
-console.log("log prop   ",testObj["prop"])
-console.log("log prop2   ",testObj.prop)
-
-
-
-testObj["pi"] = 3.14
-delete testObj.prop
-console.log("deleted prop   ",testObj)
-
-testObj["sumOfTwo"] = function sumOfTwoFunc (x,y) {
-    return x + y
+function timeFunc() {
+    let time=new Date();
+    let hours=time.getHours();
+    let minutes=time.getMinutes();
+    let seconds=time.getSeconds();
+    minutes=checkTime(minutes);
+    seconds=checkTime(seconds);
+    document.body.innerHTML=hours+":"+minutes+":"+seconds;
+    setTimeout(timeFunc,500);
 }
-console.log("type sumOfTwo   ",typeof testObj.sumOfTwo("40", 150))
-
-let newObj = Object.assign({"newProp":{"x":10}}, testObj)
-console.log("newObj   ",newObj)
-
-for (let key in testObj) {
-    delete testObj[key]
-}
-console.log("delete   ",testObj)
-
-let copiedObj = {...newObj}
-console.log("copied   ",copiedObj)
-
-copiedObj["newProp"] = {x:100}
-console.log("x eq 100   ",copiedObj)
-
-console.log("newprop in copiedObj and newObj   ",copiedObj["newProp"], newObj["newProp"])
-
-let arrayForCope = []
-
-for (let key in copiedObj) {
-    arrayForCope.push(`${key}, ${copiedObj[key]}`)
-}
-console.log("obj to arr   ",arrayForCope)
-
-function constructObject(objectName = "noName", objectNumber = "0", objectString="") {
-    let obj = {}
-    obj.objectName = objectName
-    obj.objectString = objectString
-    obj.objectNumber = objectNumber
-    obj.greet = () => {
-        return "hello"
+function checkTime(i) {
+    if (i<10) {
+        i="0" + i;
     }
-    return obj
+    return i;
 }
 
-let createdObj1 = constructObject("TEST","10", "im string")
-let createdObj2 = constructObject()
-console.log(createdObj2, createdObj1)
+//2nd task
+
+const timerId = setInterval(() => {
+  console.log('Im a delayed function')
+}, 3500)
+
+//3rd task
 
 
-let createdArr1 = []
-let createdArr2 = []
-createdArr1.push(Object.keys(createdObj1))
-createdArr2.push(Object.keys(createdObj2))
-console.log(createdArr1, createdArr2)
-
-
-function deepClone(obj) {
-    let copyObj = {}
-    for(let key in obj) {
-        if(Array.isArray(obj[key])) {
-            copyObj[key] = [...obj[key]]
-            console.log("Array.isArray")
-
+function bubbleSortFunc(arr)       
+{                            
+    let length = arr.length;
+    for (let i = 0; i < length-1; i++)
+     { for (let j = 0; j < length-1-i; j++)
+        { if (arr[j+1] < arr[j])
+           { let t = arr[j+1]; arr[j+1] = arr[j]; arr[j] = t; }
         }
-        
-        
-        else {
-            if(typeof obj[key] === "object") {
-                copyObj[key] = deepClone(obj[key])
-                
-            }else {
-                copyObj[key] = obj[key]
-            }
-            
-        }
-    }
-    return copyObj
-        
-		
-		
-	
+     }                     
+    return arr;    // На выходе сортированный по возрастанию массив A.
 }
 
-const targetObj = {
-    x: 1,
-    y: {
-        w: 'test',
-        q: {
-            a: true,
-            b: () => console.log('useless'),
-            c: {
-                d: ['a', 'b', 'c']
-            }
-        }
-    },
-    z: [1,2,3,4,5]
+let randArr1 = []
+let randArr2 = []
+let randArr3 = []
+function randInt () {
+    let rand = Math.trunc(-1000 + Math.random() * (1000 + 1000))
+    return rand
 }
-let copied = deepClone(targetObj)
-console.log(copied)
-console.log(targetObj)
 
-targetObj.y.q.c.d[0] = 100
-const areElementsEqual = targetObj.y.q.c.d[0] === copied.y.q.c.d[0]
-console.log(areElementsEqual)
-// console.log(copied)
-// console.log(targetObj)
+for(let i=0; i<10; i++) {
+    randArr1[i] = randInt ()
+}
+for(let i=0; i<100; i++) {
+    randArr2[i] = randInt ()
+}
+for(let i=0; i<1000; i++) {
+    randArr3[i] = randInt ()
+}
+let randArrSort1 = randArr1
+let randArrSort2 = randArr2
+let randArrSort3 = randArr3
+
+console.time('buble 10 symb')
+bubbleSortFunc(randArr1)
+console.timeEnd('buble 10 symb')
+console.log(randArr1.length)
+
+console.time('buble 100 symb')
+bubbleSortFunc(randArr2)
+console.timeEnd('buble 100 symb')
+console.log(randArr2.length)
+
+console.time('buble 1000 symb')
+bubbleSortFunc(randArr3)
+console.timeEnd('buble 1000 symb')
+console.log(randArr3.length)
+
+console.time('sort 10 symb')
+randArrSort1.sort((prev,next) => {
+    return next - prev
+})
+console.timeEnd('sort 10 symb')
+
+console.time('sort 100 symb')
+randArrSort2.sort((prev,next) => {
+    return next - prev
+})
+console.timeEnd('sort 100 symb')
+
+console.time('sort 1000 symb')
+randArrSort3.sort((prev,next) => {
+    return next - prev
+})
+console.timeEnd('sort 1000 symb')
+
+
