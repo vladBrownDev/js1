@@ -1,6 +1,8 @@
-//1st task
+// //1st task
 "use strict"
+
 function timeFunc() {
+    
     let time=new Date()
     let hours=time.getHours()
     let minutes=time.getMinutes()
@@ -8,9 +10,15 @@ function timeFunc() {
     minutes=checkTime(minutes)
     seconds=checkTime(seconds)
     hours=checkTime(hours)
-    document.body.innerHTML=hours+":"+minutes+":"+seconds
-    setTimeout(timeFunc,500)
+    let dateVar = `${hours} : ${minutes} : ${seconds}` //`hours + ":" + minutes +":" + seconds`
+    console.log(dateVar)
+    return dateVar
+     //setTimeout(timeFunc(), 500)
+     
 }
+let docTime = setInterval(timeFunc, 500)
+document.body.innerText=docTime
+
 function checkTime(i) {
     if (i<10) {
         i="0" + i
@@ -18,7 +26,9 @@ function checkTime(i) {
     return i
 }
 
-//2nd task
+
+
+// 2nd task
 
 const timerId = setTimeout(() => {
   console.log('Im a delayed function')
@@ -31,7 +41,7 @@ function bubbleSortFunc(arr) {
 
     let length = arr.length
     for (let i = 0; i < length-1; i++) {
-        for (let j = 0; j < length-1-i; j++) {
+        for (let j = 0; j < length-1; j++) {
             if (arr[j+1] < arr[j]){
                 let t = arr[j+1]
                 arr[j+1] = arr[j]
@@ -67,6 +77,8 @@ console.time('buble 10 symb')
 bubbleSortFunc(randArr1)
 console.timeEnd('buble 10 symb')
 console.log(randArr1.length)
+console.log(randArr1)
+
 
 console.time('buble 100 symb')
 bubbleSortFunc(randArr2)
@@ -80,20 +92,41 @@ console.log(randArr3.length)
 
 console.time('sort 10 symb')
 randArrSort1.sort((prev,next) => {
-    return next - prev
+    return prev - next
 })
+console.log(randArrSort1)
 console.timeEnd('sort 10 symb')
 
 console.time('sort 100 symb')
 randArrSort2.sort((prev,next) => {
-    return next - prev
+    return prev - next
 })
 console.timeEnd('sort 100 symb')
 
 console.time('sort 1000 symb')
 randArrSort3.sort((prev,next) => {
-    return next - prev
+    return prev - next
 })
 console.timeEnd('sort 1000 symb')
 
 
+//4rd task
+
+let taskArr = [9,8,7,6,5,4,3,2,1]
+
+function randSort (arr) {
+    let length = arr.length
+    for (let i = 0; i < length-1; i++) {
+        let randomForArr = NaN
+        for (let j = 0; j < length-1; j++) {
+            randomForArr = -2 + Math.trunc(Math.random() * (2 + 2))
+            if (arr[j+randomForArr] < arr[j]){
+                let t = arr[j+1]
+                arr[j+1] = arr[j]
+                arr[j] = t
+            }
+        }
+     }                     
+    return arr; 
+}
+console.log(randSort(taskArr))
