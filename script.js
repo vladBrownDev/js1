@@ -1,132 +1,91 @@
-// //1st task
 "use strict"
+let objMethods = {
+    splice : true,
+    slice : false,
+    concat : false,
+    filter:false,
+    map:false,
+    reverse:true,
+    push: true,
+    sort:true,
+    split:false,
+    join:false
+}
+function createMainFunc () {
+    let createMain = document.createElement("main")
+    document.body.append(createMain)
+}
+function main () {
+    let counter = 0
+    createMainFunc ()
+    let createTable = document.createElement("table")
+    document.querySelector("main").append(createTable)
+    createTheadFunc ()
+    createTbodyFunc ()
+    createRow("methodRowClass")
+    createRow ("rowIsMutable")
+    for (let key in objMethods) {
+        document.querySelector(".methodRowClass").append(createTr (`methodTrClass${counter}`))
+        document.querySelector(`.methodTrClass${counter}`).innerText = key
+        document.querySelector(".rowIsMutable").append(createTr (`isMutableTrClass${counter}`))
+        document.querySelector(`.isMutableTrClass${counter}`).innerText = objMethods[key]
+        if(objMethods[key] === !false) {
+            document.querySelector(`.isMutableTrClass${counter}`).classList.add("redValue")
+            document.querySelector(`.methodTrClass${counter}`).classList.add("redValue")
+        }
+        else {
+            document.querySelector(`.isMutableTrClass${counter}`).classList.add("greenValue")
+            document.querySelector(`.methodTrClass${counter}`).classList.add("greenValue")
+        }
+        counter++
+      }
+}
+function createTbodyFunc (){
+    let createTbody = document.createElement("tbody")
+    document.querySelector("table").append(createTbody)
 
-function timeFunc() {
+}
+function createTheadFunc () {
+    let createThead = document.createElement("thead")
+    document.querySelector("table").append(createThead)
+    let row = document.createElement("td")
+    let row2 = document.createElement("td")
+    document.querySelector("thead").append(row)
+    document.querySelector("thead").append(row2)
+    row.classList.add("headMethod")
+    row2.classList.add("headMutation")
+    document.querySelector(`.headMethod`).innerText = "Array method"
+    document.querySelector(`.headMutation`).innerText = "Mutable?"
+
+}
+function createRow (className) {
+    let row = document.createElement("td")
+    document.querySelector("tbody").append(row)
+    row.classList.add(className)
+}
+function createTr (className) {
+    let createTr = document.createElement("tr")
+    // document.querySelector("td").append(createTr)
+    createTr.classList.add(className)
+    return createTr
+
+
+}
+function changeRedColor () {
+    let toChange = document.querySelectorAll(".redValue")
+    toChange.forEach(element => element.classList.toggle("lowOpacityRed"))
     
-    let time=new Date()
-    let hours=time.getHours()
-    let minutes=time.getMinutes()
-    let seconds=time.getSeconds()
-    minutes=checkTime(minutes)
-    seconds=checkTime(seconds)
-    hours=checkTime(hours)
-    let dateVar = `${hours} : ${minutes} : ${seconds}` //`hours + ":" + minutes +":" + seconds`
-    console.log(dateVar)
-    return dateVar
-     //setTimeout(timeFunc(), 500)
-     
 }
-let docTime = setInterval(timeFunc, 500)
-document.body.innerText=docTime
-
-function checkTime(i) {
-    if (i<10) {
-        i="0" + i
-    }
-    return i
+function dissapearFunc () {
+    document.querySelector("main").classList.add("dissapear")
 }
-
-
-
-// 2nd task
-
-const timerId = setTimeout(() => {
-  console.log('Im a delayed function')
-}, 3500)
-
-//3rd task
-
-
-function bubbleSortFunc(arr) {
-
-    let length = arr.length
-    for (let i = 0; i < length-1; i++) {
-        for (let j = 0; j < length-1; j++) {
-            if (arr[j+1] < arr[j]){
-                let t = arr[j+1]
-                arr[j+1] = arr[j]
-                arr[j] = t
-            }
-        }
-     }                     
-    return arr;    
+function cursiveFunc () {
+    let toChange = document.querySelectorAll(".redValue")
+    toChange.forEach(element => element.classList.toggle("cursive"))
 }
+main()
+setInterval(changeRedColor, 3000)
+setTimeout(cursiveFunc, 5000)
+setTimeout(cursiveFunc, 10000)
+setTimeout(dissapearFunc, 90000)
 
-let randArr1 = []
-let randArr2 = []
-let randArr3 = []
-function randInt () {
-    let rand = Math.trunc(-1000 + Math.random() * (1000 + 1000))
-    return rand
-}
-
-for(let i=0; i<10; i++) {
-    randArr1[i] = randInt ()
-}
-for(let i=0; i<100; i++) {
-    randArr2[i] = randInt ()
-}
-for(let i=0; i<1000; i++) {
-    randArr3[i] = randInt ()
-}
-let randArrSort1 = randArr1
-let randArrSort2 = randArr2
-let randArrSort3 = randArr3
-
-console.time('buble 10 symb')
-bubbleSortFunc(randArr1)
-console.timeEnd('buble 10 symb')
-console.log(randArr1.length)
-console.log(randArr1)
-
-
-console.time('buble 100 symb')
-bubbleSortFunc(randArr2)
-console.timeEnd('buble 100 symb')
-console.log(randArr2.length)
-
-console.time('buble 1000 symb')
-bubbleSortFunc(randArr3)
-console.timeEnd('buble 1000 symb')
-console.log(randArr3.length)
-
-console.time('sort 10 symb')
-randArrSort1.sort((prev,next) => {
-    return prev - next
-})
-console.log(randArrSort1)
-console.timeEnd('sort 10 symb')
-
-console.time('sort 100 symb')
-randArrSort2.sort((prev,next) => {
-    return prev - next
-})
-console.timeEnd('sort 100 symb')
-
-console.time('sort 1000 symb')
-randArrSort3.sort((prev,next) => {
-    return prev - next
-})
-console.timeEnd('sort 1000 symb')
-
-
-//4rd task
-
-let taskArr = [9,8,7,6,5,4,3,2,1]
-
-function randSort (arr) {
-    let length = arr.length
-    for (let i = 0; i < length-1; i++) {
-        let randomForArr = NaN
-        for (let j = 0; j < length-1; j++) {
-            randomForArr = -2 + Math.trunc(Math.random() * (2 + 2))
-            if (arr[j+randomForArr] < arr[j]){
-                let t = arr[j+1]
-                arr[j+1] = arr[j]
-                arr[j] = t
-            }
-        }
-     }                     
-    return arr; 
-}
-console.log(randSort(taskArr))
