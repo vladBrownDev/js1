@@ -1,91 +1,96 @@
 "use strict"
-let objMethods = {
-    splice : true,
-    slice : false,
-    concat : false,
-    filter:false,
-    map:false,
-    reverse:true,
-    push: true,
-    sort:true,
-    split:false,
-    join:false
-}
-function createMainFunc () {
-    let createMain = document.createElement("main")
-    document.body.append(createMain)
-}
-function main () {
-    let counter = 0
-    createMainFunc ()
-    let createTable = document.createElement("table")
-    document.querySelector("main").append(createTable)
-    createTheadFunc ()
-    createTbodyFunc ()
-    createRow("methodRowClass")
-    createRow ("rowIsMutable")
-    for (let key in objMethods) {
-        document.querySelector(".methodRowClass").append(createTr (`methodTrClass${counter}`))
-        document.querySelector(`.methodTrClass${counter}`).innerText = key
-        document.querySelector(".rowIsMutable").append(createTr (`isMutableTrClass${counter}`))
-        document.querySelector(`.isMutableTrClass${counter}`).innerText = objMethods[key]
-        if(objMethods[key] === !false) {
-            document.querySelector(`.isMutableTrClass${counter}`).classList.add("redValue")
-            document.querySelector(`.methodTrClass${counter}`).classList.add("redValue")
-        }
-        else {
-            document.querySelector(`.isMutableTrClass${counter}`).classList.add("greenValue")
-            document.querySelector(`.methodTrClass${counter}`).classList.add("greenValue")
-        }
-        counter++
-      }
-}
-function createTbodyFunc (){
-    let createTbody = document.createElement("tbody")
-    document.querySelector("table").append(createTbody)
+currentDate ()
+function getNodesTexts(selector) {
+    const elementsList = document.querySelectorAll(selector);
+    const elementsTextsList = [];
+    for (const element of elementsList) {
+      elementsTextsList.push(element.innerText);
+    }
+    return elementsTextsList;
+  }
+  
+  function randomSortElementsTexts(targetArr) {
+    return [...targetArr].sort(() => Math.random() - 0.5);
+  }
+  
+  function constructElementsMarkup(tag, className, textsList) {
+    return textsList.reduce((markupStr, element) => {
+      const liMarkup = `<${tag} class="${className}">${element}</${tag}>`;
+      markupStr += liMarkup;
+      return markupStr;
+    }, "");
+  }
+  
+  function replaceMarkup(selector, markupString) {
+    const element = document.querySelector(selector);
+    element.innerHTML = markupString;
+  }
+  
+  function firstTaskManager() {
+    const SELECTOR_STR = "randomListItem";
+    // 1 step: get all li tags texts
+    setInterval(() => {
+      const liElementsTextsList = getNodesTexts(`.${SELECTOR_STR}`);
+      // step 2: random sort texts
+      const sortedTextsList = randomSortElementsTexts(liElementsTextsList);
+      // step 3: create markup
+      const liMarkupString = constructElementsMarkup(
+        "li",
+        SELECTOR_STR,
+        sortedTextsList
+      );
+      // set new markup to ol tag
+      replaceMarkup(".randomList", liMarkupString);
+    }, 5000);
+  }
+  
 
-}
-function createTheadFunc () {
-    let createThead = document.createElement("thead")
-    document.querySelector("table").append(createThead)
-    let row = document.createElement("td")
-    let row2 = document.createElement("td")
-    document.querySelector("thead").append(row)
-    document.querySelector("thead").append(row2)
-    row.classList.add("headMethod")
-    row2.classList.add("headMutation")
-    document.querySelector(`.headMethod`).innerText = "Array method"
-    document.querySelector(`.headMutation`).innerText = "Mutable?"
+    firstTaskManager();
+  
 
+  
+//2nd task
+
+function userInfo (i) {
+  let browser = navigator.userAgent.split(" ")[10]
+  let screenWidth = `${window.screen.width} px`
+  let screenHeight = `${window.screen.height} px`
+  let userOS = `${navigator.userAgent.split(" ")[1]} ${navigator.userAgent.split(" ")[3]} `
+  let infoArr = [browser,screenWidth,screenHeight,userOS]
+  return infoArr[i]
 }
-function createRow (className) {
-    let row = document.createElement("td")
-    document.querySelector("tbody").append(row)
-    row.classList.add(className)
-}
-function createTr (className) {
-    let createTr = document.createElement("tr")
-    // document.querySelector("td").append(createTr)
-    createTr.classList.add(className)
-    return createTr
 
 
-}
-function changeRedColor () {
-    let toChange = document.querySelectorAll(".redValue")
-    toChange.forEach(element => element.classList.toggle("lowOpacityRed"))
+console.log(document.querySelectorAll("li"))
+
+function setInfo () {
+  document.querySelectorAll("li:nth-child(1)")
+  let counter = 0
+  for(let i = 0;i<=4; i++) {
+    counter++
+    let dom = document.querySelector(`p:nth-child(${counter})`).innerText
+    document.querySelector(`p:nth-child(${counter})`).innerText = dom.replace("unknown", userInfo(i))
     
-}
-function dissapearFunc () {
-    document.querySelector("main").classList.add("dissapear")
-}
-function cursiveFunc () {
-    let toChange = document.querySelectorAll(".redValue")
-    toChange.forEach(element => element.classList.toggle("cursive"))
-}
-main()
-setInterval(changeRedColor, 3000)
-setTimeout(cursiveFunc, 5000)
-setTimeout(cursiveFunc, 10000)
-setTimeout(dissapearFunc, 90000)
 
+  }
+  
+}
+setTimeout(setInfo,4600)
+
+//3rd task
+
+function replaceFunc () {
+  document.querySelector("h3").outerHTML = "<h1>NEW LIST HEADER</h1>"
+}
+setTimeout(replaceFunc,9600)
+
+//4rd task
+
+function currentDate () {
+  let day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let mon = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
+  let date = new Date()
+  let dateString = day[date.getDay()] + " " + mon[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear()
+  document.querySelector("nav").innerText = dateString
+  document.querySelector("nav").setAttribute("style", "color:gray")
+}
